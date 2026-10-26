@@ -15,8 +15,26 @@ https://doi.org/10.48550/arXiv.2607.28431
 ## Review of the review
 A brief summary around these questions:
 - What are the key areas being researched?
+  - RQ1: How effective are state-of-the-art threat modeling techniques in identifying GenAIspecific security issues in an SME setting?
+  - RQ2: How do practitioners perceive the adoption and integration of these techniques in an SME context?
 - What's widely agreed upon?
+
+Although current techniques can capture prominent GenAI-related threats such as prompt injection and data poisoning, they provide only limited support for broader architectural, supply-chain, and human-centered risks. The future of GenAI-aware TM depends on combining comprehensive threat coverage with lightweight, tool-supported, and actionable integration into software development practice.
+  - RP1: GenAI-aware TM approaches should explicitly incorporate knowledge of supplychain security into their frameworks while supporting some degree of automation.
+  - RP2: Future work should explore prompt-guided and checklist-supported workflows for integrating GenAI-aware TM into LLM-assisted development practices.
+  - RP3: GenAI-aware TM approaches should account for developers’ over-reliance on LLM-generated outputs by modeling human-centered threat propagation paths and identifying intervention points across the system architecture.
+  - Findings RQ1. Although the evaluated Threat Modeling (TM) techniques identified several GenAIrelated issues, their coverage was strongest for input- and model-interaction threats (e.g., Prompt Injection, Data and Model Poisoning). Coverage was limited or absent for categories requiring broader architectural, supply-chain, or human-centered reasoning (e.g., Supply Chain Vulnerabilities and Excessive Agency). M3 provided the broadest support due to its tool-supported analysis and dedicated AI-oriented modeling syntax.
+  - Findings RQ2. Practitioners rated M3 highest across all survey dimensions, particularly for its support in surfacing GenAI Threats and its relatively low perceived Effort. M1 and M3 received higher scores than M2 for Effectiveness, Awareness, Actionability, and Integration. Across methods, Socio-technical Threats received the lowest scores, consistent with the RQ1 findings. Participants also emphasized the need for better integration with existing development workflows, especially issue-tracking and security review processes.
+
+_M1 – AI-as-a-Service (AIaaS) Framework. Relies on Data Flow Diagrams (DFD)-based system representations and structures the analysis around asset groups such as Data, Model, Environment, and Process. For each asset category, the framework provides STRIDE-based threat listings along with prospective mitigation actions._
+
+_M2 – Attacks on Dataset, Model and Input (ADMIn) Framework. It adopts an attackcentric perspective around three major attack surfaces, namely Datasets, Models, and System inputs. The analysis is structured through DFD-like architectural representations and predefined attack categories associated with each attack surface. The method further provides guidance on threat prioritization and mitigation activities._
+
+_M3 – ThreatFinderAI. This approach extends traditional DFDs with AI-specific assets (e.g., prompts and pre-trained models), which are subsequently analyzed through attack graphs and risk scenarios. Threat identification is semi-automated through the integration of external security knowledge bases such as MITRE ATLAS and OWASP AI Exchange. Unlike M1 and M2, this method is tool-supported._
+
 - What are the open questions?
+  - OE1: What were the top 3 most valuable threats identified across the methods, and why?
+  - OE2: What would have to change for this method to be adoptable in your workflow?
 
 ## Threat modeling quickrun
 Create two risks and decide what to do with them. Imagine the details. Be brief, but specific. (This task does not require technical tests on a computer)
