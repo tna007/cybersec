@@ -19,7 +19,22 @@ The investigation found out who owned the lookalike domain (to figure that out, 
 ### How could the security team help defend against this?
 
 A lot of tools that are getting better at detecting this sort of thing, such as identifying when a lookalike domain has e-mailed you, or tools that just do basic domain reputation checking and then quarantine any e-mails that just don’t look right. Security is everyone’s responsibility in a company
-## B - Blog post
+## B - Blog post Summary
+### Studying Fraudulent North Korean IT Workers
+[Schneier on Security - Researchers set up a fake start-up company to study fraudulent North Korean IT workers](https://www.schneier.com/blog/archives/2026/10/studying-fraudulent-north-korean-it-workers.html)
+
+Security researchers invented a cryptocurrency startup, advertised developer jobs, and hired 3 people they believe were North Korean operatives. Every virtual machine the company issued was recording.
+
+The onboarding paperwork revealed all the 3 new hired had had fake identity (SSN, driving license and bank account) with method such as forged or altered using image editing software and AI job-application and interview-assistance extensions.
+
+A successful placement gives the operative a real employee account and access to source code and internal systems. North Korean IT workers then wired their salaries to parent North Korean agencies.
+
+In April, The Justice Department sentenced 2 US facilitators over a separate scheme that placed workers at more than 100 US companies on at least 80 stolen identities and earned North Korea more than $5 million. The operation was a sequel. Another scheme is they became the employer, building a fake DeFi protocol called Ballena Azul. Then a recruiter trawling GitHub for facilitators delivered the first developer. That developer vouched for a friend, who vouched for a third. All 3 ran dxdiag, systeminfo, and wmic to profile their machines.
+
+The report places infrastructure on Vultr and Gorilla Servers and says AstrillVPN exit nodes ran throughout.
+
+### What can be done to limit this risk?
+The researchers advise periodic identity checks rather than one at hire, in-person verification for remote-first companies, recruiter training, and blocking AstrillVPN.
 
 ## C - Science that
 Link some theory, model or article you read in h1 CyberScience to a blog post or podcast episode you found here. Can you put a fresh security event in the context of larger understanding?
