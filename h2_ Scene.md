@@ -14,7 +14,7 @@ The investigation found out who owned the lookalike domain (to figure that out, 
 
 ### How could the security team help defend against this?
 
-A lot of tools that are getting better at detecting this sort of thing, such as identifying when a lookalike domain has e-mailed you, or tools that just do basic domain reputation checking and then quarantine any e-mails that just don’t look right. Security is everyone’s responsibility in a company
+A lot of tools that are getting better at detecting this sort of thing, such as identifying when a lookalike domain has e-mailed you, or tools that just do basic domain reputation checking and then quarantine any e-mails that just don’t look right. Security is everyone’s responsibility in a company.
 
 ## B - Blog post Summary
 ### Studying Fraudulent North Korean IT Workers
@@ -36,7 +36,7 @@ The researchers advise periodic identity checks rather than one at hire, in-pers
 
 ## C - Science that
 
-The [podcast](#a---podcast-summary) that I chose illustrates the [review paper](./h1_CyberScience.md)'s concern that architecture-focused methods can overlook an attack whose critical vulnerability is organizational trust. No model, database, or payment platform necessarily had to be technically compromised. The attacker manipulated the meaning attached to ordinary business artifacts such as invoices, domains, signatures, and bank-account details.
+The [podcast](#a---podcast-summary) that I chose illustrates the [review paper](./h1_CyberScience.md)'s concern that architecture-focused methods can overlook an attack whose critical vulnerability is organizational trust. No model, database, or payment platform necessarily had to be technically compromised. The attacker manipulated the meaning attached to ordinary business artifacts such as invoices, domains, signatures, and bank account details.
 
 The review paper found that threat models struggle with human-centered and socio-technical risks. This reflected in the podcast that the attack worked because employees trusted a familiar supplier identity and fell for the changed payment details. As a result, a technically secure payment system can still fail when its business verification process is weak, which would be the larger lesson from this perspective.
 
