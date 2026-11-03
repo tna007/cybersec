@@ -36,11 +36,11 @@ The researchers advise periodic identity checks rather than one at hire, in-pers
 
 ## C - Science that
 
-The [podcast](#a-podcast-summary) that I chose illustrates the [review paper](./h1_CyberScience.md)'s concern that architecture-focused methods can overlook an attack whose critical vulnerability is organizational trust. No model, database, or payment platform necessarily had to be technically compromised. The attacker manipulated the meaning attached to ordinary business artifacts such as invoices, domains, signatures, and bank-account details.
+The [podcast](#a---podcast-summary) that I chose illustrates the [review paper](./h1_CyberScience.md)'s concern that architecture-focused methods can overlook an attack whose critical vulnerability is organizational trust. No model, database, or payment platform necessarily had to be technically compromised. The attacker manipulated the meaning attached to ordinary business artifacts such as invoices, domains, signatures, and bank-account details.
 
 The review paper found that threat models struggle with human-centered and socio-technical risks. This reflected in the podcast that the attack worked because employees trusted a familiar supplier identity and fell for the changed payment details. As a result, a technically secure payment system can still fail when its business verification process is weak, which would be the larger lesson from this perspective.
 
-A fresh security event in the context of the larger understanding could be the compromise of LiteLLM version 1.107.0 on October 2026 - a malicious package appeared to be a legitimate release because of a maintainer identity exposed months earlier but reportedly never revoked, and attackers used this to make successful build and signing process.
+A fresh security event in the context of the larger understanding could be the compromise of [LiteLLM version 1.107.0 on October 2026](https://labs.cloudsecurityalliance.org/research/ciso-daily-briefing-20261026/) - a malicious package appeared to be a legitimate release because of a maintainer identity exposed months earlier but reportedly never revoked, and attackers used this to make successful build and signing process.
 
 ## D - Download Debian
 Download Debian 13-Trixie installation image on the computer you'll use in the class. (Yes, this task is literally just downloading the ISO. Installing is a voluntary task for now.)
