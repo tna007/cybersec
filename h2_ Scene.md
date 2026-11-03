@@ -4,7 +4,7 @@
 ### The intention of getting a company to send payments to the wrong person
 [Ep 124: Synthetic Remittance - Darknet Diaries podcast](https://darknetdiaries.com/transcript/124/)
 
-Evaldas Rimasauskas, 43yr old in 2012, was living in Vilnius - capital of Lithuania. Using social-engineer and BEC (Business E-mail Compromise), Evaldas and his small team managed earned the organizational and payment relationships around Facebook, Google with Quanta Computing.
+Evaldas Rimasauskas, 43yr old in 2012, was living in Vilnius - capital of Lithuania. Using social-engineer and BEC (Business E-mail Compromise), Evaldas and his small team managed to learn the organizational and payment relationships around Facebook, Google with Quanta Computing.
 
 He then imitated the trusted supplier - Quanta Computing and altered payment information.
 
