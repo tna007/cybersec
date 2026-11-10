@@ -158,3 +158,7 @@ Install Debian Trixie-13 on VirtualBox 7.2.22 on my Windows 10.
 3. Update the package list by running in the terminal `sudo apt-get update` or `sudo apt-get upgrade`
 ## c) Crack
 Done. Crack the hash 6b1628b016dff46e6fa35684be6acc96 following the instruction from [Karvinen 2022: Cracking Passwords with Hashcat](#karvinen-2022-cracking-passwords-with-hashcat).
+## d) Voluntary bonus
+John the Ripper. Install and test John the Ripper Jumbo, see [Karvinen 2023: Crack File Password With John](https://terokarvinen.com/2023/crack-file-password-with-john/).
+## e) Voluntary bonus
+The other John. Create an encrypted file (other than zip) and crack the hash with John.
