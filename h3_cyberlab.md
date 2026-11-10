@@ -145,6 +145,16 @@ In some other exercise, you might get "Status: Exhausted" instead of "Cracked". 
   - `-o` solved	save the solution as plain text to a new file "solved" in working directory.
 
 ## a) Presentation title
-## b) Install Linux
+## b) Install Linux on a Virtual Machine
+Install Debian Trixie-13 on VirtualBox 7.2.22 on my Windows 10.
+### Install VirtualBox
+1. Download latest version of VirtualBox for Windows host from https://www.virtualbox.org/wiki/Downloads
+2. Launch the VirtualBox Setup wizard -> Keep clicking Next with all the default options unless you want to change some options until you see the Warning: Network Interfaces screen -> Click Yes to continue to the Ready to Install screen -> Click Install -> Installation takes a few minutes then click Finish.
+3. Create your new Virtual Machine (VM) on VirtualBox by clicking the New button in the top-right corner of the VirtualBox window to open the Create Virtual Machine wizard -> on the Name and operating system page fill in VM Name (based on its intended purposes i.e nginx-web-server or windows10-development), ISO image (path to location where the image is downloaded from https://www.debian.org/download), VM Folder (a Windows VM will need at least 20GB so ensure there’s enough space on your drive for your VM), Type: Linux, Distribution: Debian, Version: Debian (64-bit) -> Click Specify virtual hardware accordion to set how much memory (RAM) your VM will have (minimun 2048MB RAM, recommended 4096MB, 2 CPUs for instance) -> Click Specify virtual hard disk accordion to create a new hard disk for your guest VM or use an existing one. If create new one minimun 20GB, recommended 20-40GB. -> Click Finish to complete.
+   
+### Install Debian
+1. Start the VM you just created by double clicking or right‑clicking on its name and click Start.
+2. Live Install: Select the first option from the list and press enter -> open Terminal Emulator and type some commands to check that keyboard is working e.g. pwd on your VM -> Click Install Debian that is visible in the GUI -> Go through the step in the Debian Installer until Partitions: Erase disk (safe to use when installing Linux on a fresh VM) -> Click Next to Users (set hostname for the new VM, non‑root username and a strong password for that user) -> Click Next to Summary page to check the final overview -> Click Install -> After a few mins it's completed click Done -> The system will boot into Debian GNU/Linux, log in using the credentials you created.
+3. Update the package list by running in the terminal `sudo apt-get update` or `sudo apt-get upgrade`
 ## c) Crack
-Crack the hash 6b1628b016dff46e6fa35684be6acc96 following the instruction from [Karvinen 2022: Cracking Passwords with Hashcat](#karvinen-2022-cracking-passwords-with-hashcat)
+Done. Crack the hash 6b1628b016dff46e6fa35684be6acc96 following the instruction from [Karvinen 2022: Cracking Passwords with Hashcat](#karvinen-2022-cracking-passwords-with-hashcat).
