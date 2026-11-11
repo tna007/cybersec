@@ -56,7 +56,7 @@ The author has Windows 11, Virtualbox 7.x and Debian 13.x (Trixie). The steps ar
 - Important directories
   - `/`	Root directory, the top of the filesystem. There are no drive letters in Linux, everything is under /.
   - `/home/`	Contains home directories for all users.
-  - `/home/tna/`	Home directory of user "tero". The only place where user "tero" can permanently store data.
+  - `/home/tna/`	Home directory of user "tna". The only place where user "tna" can permanently store data.
   - `/etc/`	All system wide settings. They are in human readable, plain text files.
   - `/media/`	Removable media, such as /media/cdrom/ or /media/usbdisk/
   - `/var/log/`	System wide logs, such as /var/log/syslog, /var/log/auth.log and /var/log/apache2/error.log
