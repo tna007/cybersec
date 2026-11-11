@@ -145,6 +145,7 @@ In some other exercise, you might get "Status: Exhausted" instead of "Cracked". 
   - `-o` solved	save the solution as plain text to a new file "solved" in working directory.
 
 ## a) Presentation title
+Security maturity model.
 ## b) Install Linux on a Virtual Machine
 Install Debian Trixie-13 on VirtualBox 7.2.22 on my Windows 10.
 ### Install VirtualBox
