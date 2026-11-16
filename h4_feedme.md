@@ -13,6 +13,35 @@
 
 ## a) Feed reader installation
 
+<img width="1631" height="1031" alt="Screenshot 2026-11-16 at 22 06 02" src="https://github.com/user-attachments/assets/18da1156-41d2-4969-a7e9-fa686b171db8" />
 
+## b) Add a feed for [Krebs](https://krebsonsecurity.com/feed/)
 
-## b) Add the feed for [Krebs](https://krebsonsecurity.com/feed/)
+<img width="1631" height="1031" alt="Screenshot 2026-11-16 at 22 06 47" src="https://github.com/user-attachments/assets/1fc3c17a-ae22-4ce3-9f07-325177d2c11b" />
+
+## c) Add a feed for Schneier on Security
+
+<img width="1631" height="1031" alt="Screenshot 2026-11-16 at 22 08 27" src="https://github.com/user-attachments/assets/11b4a414-7bdf-4f8c-994a-dc8deab7e5f3" />
+
+## d) Find and add two more security related feeds
+
+Added HackerOne and Hacker Noon because I want to follow Hacker Noon to understand what is happening across tech and cybersecurity, and HackerOne to learn how vulnerabilities are actually discovered and handled in practice. How I found them was from long time ago by chatting with friends who were working in cybersec on how to keep up to date with the industry updates.
+
+## e) Follow security feeds for a while
+
+In general, I found a feed reader useful for keeping a broad awareness of the cybersecurity scene without repeatedly checking many websites. Its main weakness is that subscribing is easy, but deciding what is actually worth reading is still up to me. Information overload can become a problem and a feed reader requires more manual curation.
+
+## f) Port scan
+How can criminals know what services your employer has? Disconnect your computer from the internet while doing the test (after you have installed the required software). Do the test inside your virtual machine.
+- Install nmap port scanner.
+- Disconnect from the internet. Show that 'ping 8.8.8.8' stops working when internet is disconnected.
+- Port scan your own computer. Use "localhost" as the address.
+- Install a daemon.
+- Port scan again.
+- Analyze and explain the results.
+- Do not scan random computers.
+
+## g) Voluntary bonus
+Identify a port scan against Apache on the host being scanned, e.g. in logs. Perform the test against "localhost" address and disconnect the internet while port scanning.
+## h) Voluntary bonus
+Modify nmap scan so that it cannot be detected by the method you found above.
