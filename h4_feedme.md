@@ -34,36 +34,41 @@ In general, I found a feed reader useful for keeping a broad awareness of the cy
 ## f) Port scan
 How can criminals know what services your employer has? Disconnect your computer from the internet while doing the test (after you have installed the required software). Do the test inside your virtual machine.
 - Install nmap port scanner.
+  
 ```ls
 $ sudo apt-get update
 $ sudo apt-get -y install nmap
-``
+```
+
 - Disconnect from the internet. Show that 'ping 8.8.8.8' stops working when internet is disconnected.
   
-  ```ls
+```ls
 $ ping 8.8.8.8
 ping: connect: Network is unreachable
-``
+```
 - Port scan your own computer. Use "localhost" as the address.
   
-  ```ls
+```ls
 $ sudo nmap -A -v localhost
-  ``
+```
 - Install a daemon.
   
 ```ls
 $ sudo apt-get install apache2
 $ sudo systemctl start apache2
-``
+```
 - Port scan again.
   
- ```ls
+```ls
 $ sudo nmap -A -v localhost
-``
-- Analyze and explain the results.
-TCP/IP fingerprint is different in each case.
-  - localhost without another daemon:
-    ```
+```
+
+- Analyze and explain the results
+  
+Without the daemon, the scanned localhost has no reported open port and 999 TCP ports are reported closed. After Apache is started, TCP port 80 becomes open and `nmap` identifies the service as Apache HTTP Server 2.4.71 on Debian. Service detection also reveals the server header, default Apache page and supported HTTP methods. The TCP/IP fingerprint differ between the scans even though the operating system has not changed. An open port responds differently from a closed port and provides additional information for fingerprinting. Interestingly, both scans sent exactly 1,110 packets but received different packets on my 1 time test.
+
+  - localhost without a daemon:
+    ```ls
     Host is up (0.000067s latency).
 
     Not shown: 999 closed tcp ports (reset)
@@ -72,23 +77,23 @@ TCP/IP fingerprint is different in each case.
 
     Nmap done: 1 IP address (1 host up) scanned in 18.19 seconds
            Raw packets sent: 1110 (52.890KB) | Rcvd: 2211 (98.944KB)
-    ``
+    ```
 
   - with a daemon:
-  ```
-  Host is up (0.000070s latency).
-
-  Not shown: 998 closed tcp ports (reset)
+    ```ls
+    Host is up (0.000070s latency).
   
-  80/tcp  open  http    Apache httpd 2.4.71 ((Debian))
-  |_http-server-header: Apache/2.4.71 (Debian)
-  |_http-title: Apache2 Debian Default Page: It works
-  | http-methods: 
-  |_  Supported Methods: GET POST OPTIONS HEAD
-  
-  Nmap done: 1 IP address (1 host up) scanned in 19.11 seconds
-             Raw packets sent: 1110 (52.890KB) | Rcvd: 2212 (98.988KB)
-  ``
+    Not shown: 998 closed tcp ports (reset)
+    
+    80/tcp  open  http    Apache httpd 2.4.71 ((Debian))
+    |_http-server-header: Apache/2.4.71 (Debian)
+    |_http-title: Apache2 Debian Default Page: It works
+    | http-methods: 
+    |_  Supported Methods: GET POST OPTIONS HEAD
+    
+    Nmap done: 1 IP address (1 host up) scanned in 19.11 seconds
+               Raw packets sent: 1110 (52.890KB) | Rcvd: 2212 (98.988KB)
+    ```
 
   
 - Do not scan random computers.
