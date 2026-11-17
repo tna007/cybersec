@@ -99,6 +99,6 @@ Without the daemon, the scanned localhost has no reported open port and 999 TCP 
 - Do not scan random computers.
 
 ## g) Voluntary bonus
-Identify a port scan against Apache on the host being scanned, e.g. in logs. Perform the test against "localhost" address and disconnect the internet while port scanning.
+Done. Identify a port scan against Apache on the host being scanned, e.g. in logs. Perform the test against "localhost" address and disconnect the internet while port scanning.
 ## h) Voluntary bonus
 Modify nmap scan so that it cannot be detected by the method you found above.
