@@ -15,9 +15,9 @@
             D --> E[Plaintext]
         ```
         Plaintext is binary data i.e bits, text file, bitmap, audio, video etc. ISO 7498-2 standard uses the terms “encipher” and “decipher, “encrypt” and “decrypt” refer to dead bodies in some cultures.
-        - Encryption converts message to ciphertext E(M) = C
-        - Decryption converts ciphertext back to message D(C) = M
-        - Correct encryption or decryption satisfies D(E(M)) = M
+        - Encryption converts message to ciphertext: E(M) = C
+        - Decryption converts ciphertext back to message: D(C) = M
+        - Correct encryption or decryption satisfies: D(E(M)) = M
           - C: ciphertext
           - D: decryption function
           - E: encryption function
@@ -39,8 +39,12 @@
             K2["Key K"] --> D
             D --> M2["Plaintext M"]
         ```
+        - E<sub>K</sub>(M) = C
+        - D<sub>K</sub>(C) = M
+        - D<sub>K</sub>(E<sub>K</sub>(M)) = M
         
-        Modern cryptography should rely on the secrecy of the **key**, not secrecy of the algorithm.
+        Modern cryptography should rely on the secrecy of the key, not secrecy of the algorithm. If an eavesdropper knows the algorithm but the key(s), they can't read the message.
+        A cryptosystem is an algorithm, plus all possible plaintexts, ciphertexts, and keys.
      
         ```mermaid
         ---
@@ -54,13 +58,23 @@
             K2["Decryption Key K₂"] --> D
             D --> M2["Plaintext M"]
         ```
-        
-        - E<sub>K</sub>(M) = C
-        - D<sub>K</sub>(C) = M
-        - D<sub>K</sub>(E<sub>K</sub>(M)) = M
+        - E<sub>K1</sub>(M) = C
+        - D<sub>K2</sub>(C) = M
+        - D<sub>K2</sub>(E<sub>K1</sub>(M)) = M
 
-      - Symmetric Algorithms
-      - Public-Key Algorithms (From start until the end of Algorithms; not Cryptoanalysis and onwards)
+      - Symmetric Algorithms (conventional algorithms, secret-key algorithms, single-key algorithms, or one-key algorithms)
+        - Encryption key can be calculated from decryption key and vice versa.
+        - In most symmetric algorithms, the encryption key and the decryption key are the same.
+        - Sender and receiver agree on a key before they can communicate securely.
+        - Divided into 2 categories:
+          - stream algorithms/ciphers: operate on the plaintext a single bit (sometimes byte).
+          - block algorithms/ciphers: operate on the plaintext in groups of bits which are called blocks.
+      - Public-Key Algorithms (asymmetric algorithms)
+        - The key used for encryption is different from the key used for decryption.
+        - The decryption key can't be calculated from the encryption key.
+        - Messages is encrypted with public key and decrypted with private key.
+        - Sometimes, messages will be encrypted with private key and decrypted with public key which is used in digital signatures.
+        
   - Chapter 2 - Protocol Building Blocks, sections
     - 2.5 Communications Using Public-Key Cryptography (From the start of "Communications using Public Key" until the start of "Digital signatures with encryption")
 - Karvinen 2023: [PGP - Send Encrypted and Signed Message - gpg](https://terokarvinen.com/2023/pgp-encrypt-sign-verify/)
