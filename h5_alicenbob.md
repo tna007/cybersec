@@ -2,7 +2,34 @@
 - Schneier 2015: [Applied Cryptography](https://learning.oreilly.com/library/view/applied-cryptography-protocols/9781119096726/)
   - Chapter 1 - Foundations
     - 1.1 Terminology
-      - Sender and Receiver, Messages and Encryption, Algorithms and Keys, Symmetric Algorithms, Public-Key Algorithms (From start until the end of Algorithms; not Cryptoanalysis and onwards)
+      - Sender and Receiver: a sender wants to send a securely message to a receiver.
+      - Messages and Encryption: plaintext (binary data i.e bits, text file, bitmap, audio, video etc) -> encryption -> ciphertext -> decription -> original plaintext. (ISO 7498-2 standard uses the terms “encipher” and “decipher, “encrypt” and “decrypt” refer to dead bodies in some cultures.)
+        - Encryption converts message to ciphertext E(M) = C
+        - Decryption converts ciphertext back to message D(C) = M
+        - Correct encryption or decryption satisfies D(E(M)) = M
+          - C: ciphertext
+          - D: decryption function
+          - E: encryption function
+          - M: message or plaintext (P)
+      - Authentication, Integrity, and Nonrepudiation:
+        - Authentication: verifies the origin of a message.
+        - Integrity: verifies that a message was not modified.
+        - Nonrepudiation: prevents a sender from falsely denying sending a message.
+      - Algorithms and Keys
+        ```mermaid
+        flowchart LR
+            A[Plaintext] --> B[Encryption]
+            B --> C[Ciphertext]
+            C --> D[Decryption]
+            D --> E[Plaintext]
+        ```
+        
+        - E<sub>K</sub>(M) = C
+        - D<sub>K</sub>(C) = M
+        - D<sub>K</sub>(E<sub>K</sub>(M)) = M
+
+      - Symmetric Algorithms
+      - Public-Key Algorithms (From start until the end of Algorithms; not Cryptoanalysis and onwards)
   - Chapter 2 - Protocol Building Blocks, sections
     - 2.5 Communications Using Public-Key Cryptography (From the start of "Communications using Public Key" until the start of "Digital signatures with encryption")
 - Karvinen 2023: [PGP - Send Encrypted and Signed Message - gpg](https://terokarvinen.com/2023/pgp-encrypt-sign-verify/)
