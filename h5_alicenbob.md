@@ -3,7 +3,18 @@
   - Chapter 1 - Foundations
     - 1.1 Terminology
       - Sender and Receiver: a sender wants to send a securely message to a receiver.
-      - Messages and Encryption: plaintext (binary data i.e bits, text file, bitmap, audio, video etc) -> encryption -> ciphertext -> decription -> original plaintext. (ISO 7498-2 standard uses the terms “encipher” and “decipher, “encrypt” and “decrypt” refer to dead bodies in some cultures.)
+      - Messages and Encryption: 
+        ```mermaid
+        ---
+        title: Encryption and Decryption
+        ---
+        flowchart LR
+            A[Plaintext] --> B[Encryption]
+            B --> C[Ciphertext]
+            C --> D[Decryption]
+            D --> E[Plaintext]
+        ```
+        Plaintext is binary data i.e bits, text file, bitmap, audio, video etc. ISO 7498-2 standard uses the terms “encipher” and “decipher, “encrypt” and “decrypt” refer to dead bodies in some cultures.
         - Encryption converts message to ciphertext E(M) = C
         - Decryption converts ciphertext back to message D(C) = M
         - Correct encryption or decryption satisfies D(E(M)) = M
@@ -17,11 +28,31 @@
         - Nonrepudiation: prevents a sender from falsely denying sending a message.
       - Algorithms and Keys
         ```mermaid
+        ---
+        title: Encryption and Decryption with a Key
+        ---
         flowchart LR
-            A[Plaintext] --> B[Encryption]
-            B --> C[Ciphertext]
-            C --> D[Decryption]
-            D --> E[Plaintext]
+            K1["Key K"] --> E["Encryption"]
+            M["Plaintext M"] --> E
+            E --> C["Ciphertext C"]
+            C --> D["Decryption"]
+            K2["Key K"] --> D
+            D --> M2["Plaintext M"]
+        ```
+        
+        Modern cryptography should rely on the secrecy of the **key**, not secrecy of the algorithm.
+     
+        ```mermaid
+        ---
+        title: Encryption and Decryption with Two Different Keys
+        ---
+        flowchart LR
+            K1["Encryption Key K₁"] --> E["Encryption"]
+            M["Plaintext M"] --> E
+            E --> C["Ciphertext C"]
+            C --> D["Decryption"]
+            K2["Decryption Key K₂"] --> D
+            D --> M2["Plaintext M"]
         ```
         
         - E<sub>K</sub>(M) = C
