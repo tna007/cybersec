@@ -126,7 +126,7 @@ The fingerprint provides a way to verify that an imported public key really belo
 
 exports public key:
 ``ls
-   $ gpg --export --armor --output tero.pub
+   $ gpg --export --armor --output anh.pub
 ``
 The `--armor` option converts the key into printable ASCII representation, making it easy to transfer through methods such as email.
 
@@ -134,13 +134,13 @@ Alice then imports my public key:
 ``ls
    $ gpg --homedir . --import anh.pub
 ``
-Public keys do not need to be transferred secretly. However, Alice must verify my **key fingerprint through a trusted method** to make sure that an attacker has not substituted another key.
+Public keys do not need to be transferred secretly. However, Alice must verify my key fingerprint through a trusted method to make sure that an attacker has not substituted another key.
 
-After verification, Alice can sign Tero's key to indicate that she trusts it:
+After verification, Alice can sign my key to indicate that she trusts it:
 ``ls
    $ gpg --homedir . --sign-key "fingerprint"
 ``
-The same process is repeated in the opposite direction so that Tero obtains and verifies Alice's public key.
+The same process is repeated in the opposite direction to obtain and verify Alice's public key.
 
 Once trust has been established, Alice can encrypt a message for me and digitally sign it:
 ``ls
@@ -185,7 +185,7 @@ Explain how different parties use different keys at different stages of operatio
 Demonstrate use of a password manager. What kind of attacks take advantage of people not using password managers.
 
 ## d) Voluntary: Details of PGP
-Send an encrypted and signed message using PGP, then verify and decrypt it. (You can use folders to simulate users, or use two computers or two different OS users).
+Send an encrypted and signed message using PGP, then verify and decrypt it using previously Alice folder to simulate user.
 ```ls
 tna@debian:~/alice$ cd
 tna@debian:~$ cp -v alice/anh.pub .
