@@ -76,8 +76,104 @@
         - Sometimes, messages will be encrypted with private key and decrypted with public key which is used in digital signatures.
         
   - Chapter 2 - Protocol Building Blocks, sections
-    - 2.5 Communications Using Public-Key Cryptography (From the start of "Communications using Public Key" until the start of "Digital signatures with encryption")
+    - 2.5 Communications Using Public-Key Cryptography
+      Public-key cryptography uses 2 different keys: public key - shared openly and used to encrypt a message and private key - kept secret and used to decrypt the message. If Alice wants to send a secure message to Bob: 
+      1. Alice obtains Bob's public key.
+      2. Alice encrypts the message using Bob's public key.
+      3. Alice sends the encrypted message to Bob.
+      4. Bob decrypts it using his private key.
+
+      An eavesdropper may know Bob's public key and see the ciphertext, but should not be able to derive the private key or recover the plaintext.
+      
+      - Hybrid cryptosystems are where public-key cryptography commonly combined with symmetric encryption:
+        1. Alice generates a random session key.
+        2. Alice encrypts the session key using Bob's public key.
+        3. Bob decrypts it with his private key.
+        4. Alice and Bob then use the session key for symmetric encryption.
+
+      This combines easier key distribution from public-key cryptography with the speed of symmetric encryption.
+      
+      - Merkle's Puzzles demonstrated that two parties can establish secure communication without exchanging a secret key beforehand, an important early idea behind public-key cryptography.
+        1. Bob creates a large number of puzzles, each containing a random identifier and secret key, and sends them to Alice.
+        2. Alice randomly chooses one puzzle and solves it using brute force.
+        3. Alice uses the recovered secret key to encrypt her message and sends the puzzle identifier and ciphertext to Bob.
+        4. Bob uses the identifier to find the corresponding key and decrypt the message.
+        
+        An eavesdropper Eve does not know which puzzle Alice selected and therefore has to solve many more puzzles. The idea is to make Eve's computational effort much greater than Alice's or Bob's. if Alice's effort is _n_, Eve's is _n<sup>2</sup>_.
+
 - Karvinen 2023: [PGP - Send Encrypted and Signed Message - gpg](https://terokarvinen.com/2023/pgp-encrypt-sign-verify/)
+GNU privacy guard, 'gpg', is a popular way to encrypt and sign.
+
+```ls
+# install gpg, 'micro' text editor and 'killall' from psmisc are just helpful extras
+$ sudo apt-get update
+$ sudo apt-get install gpg micro psmisc
+```
+
+First creates a PGP key pair:
+
+```ls
+$ gpg --gen-key
+```
+
+
+The fingerprint of keys in the keyring can be checked with:
+```ls
+   $ gpg --fingerprint
+```
+The fingerprint provides a way to verify that an imported public key really belongs to the expected person.
+
+
+exports public key:
+``ls
+   $ gpg --export --armor --output tero.pub
+``
+The `--armor` option converts the key into printable ASCII representation, making it easy to transfer through methods such as email.
+
+Alice then imports my public key:
+``ls
+   $ gpg --homedir . --import anh.pub
+``
+Public keys do not need to be transferred secretly. However, Alice must verify my **key fingerprint through a trusted method** to make sure that an attacker has not substituted another key.
+
+After verification, Alice can sign Tero's key to indicate that she trusts it:
+``ls
+   $ gpg --homedir . --sign-key "fingerprint"
+``
+The same process is repeated in the opposite direction so that Tero obtains and verifies Alice's public key.
+
+Once trust has been established, Alice can encrypt a message for me and digitally sign it:
+``ls
+   $ gpg --homedir . --encrypt \
+        --recipient tna@example.com.invalid \
+        --sign \
+        --output encrypted.pgp \
+        --armor msg.txt
+``
+The important options are:
+
+- `--encrypt`: Encrypt the message.
+- `--recipient`: Select the recipient's public key.
+- `--sign`: Sign the message using Alice's private key.
+- `--armor`: Produce an ASCII-armored PGP message.
+- `--output`: Specify the encrypted output file.
+
+The resulting file begins with:
+
+    -----BEGIN PGP MESSAGE-----
+
+The content can then be transferred over an untrusted network because someone intercepting it cannot read the original plaintext without my private key.
+
+Decrypt the received message with:
+
+    gpg --decrypt encrypted.pgp
+
+GPG uses my private key to decrypt the message. At the same time, Alice's public key is used to verify her digital signature.
+
+A successful verification produces output such as:
+
+    Good signature from "Alice ..."
+
 
 ## a) Pubkey today
 Explain how you have used public key cryptography today or yesterday, outside of this homework. In addition to naming the system, identify how different parties use keys in different steps of the system
