@@ -186,7 +186,50 @@ Demonstrate use of a password manager. What kind of attacks take advantage of pe
 
 ## d) Voluntary: Details of PGP
 Send an encrypted and signed message using PGP, then verify and decrypt it. (You can use folders to simulate users, or use two computers or two different OS users).
+```ls
+tna@debian:~/alice$ cd
+tna@debian:~$ cp -v alice/anh.pub .
+'alice/anh.pub' -> './anh.pub'
+tna@debian:~$ gpg --import anh.pub 
+gpg: key 9997CB85DA699699: "Anh To DEMO KEY <tna@example.com.invalid>" not changed
+gpg: Total number processed: 1
+gpg:              unchanged: 1
+tna@debian:~$ gpg --fingerprint 
+/home/tna/.gnupg/pubring.kbx
+----------------------------
+pub   ed25519 2026-11-23 [SC] [expires: 2029-11-22]
+      D61E 6982 87C1 E865 6B26  B32E 9997 CB85 DA69 9699
+uid           [ultimate] Anh To DEMO KEY <tna@example.com.invalid>
+sub   cv25519 2026-11-23 [E] [expires: 2029-11-22]
 
+pub   ed25519 2026-11-23 [SC] [expires: 2029-11-22]
+      EB13 B092 6F39 4346 7D52  C3BB A8D1 4A7B 7F62 A28E
+uid           [  full  ] Alice <alice@example.com.invalid>
+sub   cv25519 2026-11-23 [E] [expires: 2029-11-22]
+tna@debian:~$ gpg --encrypt --recipient alice@example.com.invalid --sign --output encrypted2.pgp --armor message.txt 
+tna@debian:~$ head -4 encrypted2.pgp 
+-----BEGIN PGP MESSAGE-----
+
+hF4D6OTbKnNPnyMSAQdAxXaKpmoXO1SZhOGQJnrINImlj6T1gUclzD1PAr2iNR4w
+AqOy3Hld7Oj4RbZ06WRpjSQsuKVINgtPL/XQyPX+NclyxOz8fcnACuIkCogGmE3p
+tna@debian:~$ cp -v encrypted2.pgp alice/
+'encrypted2.pgp' -> 'alice/encrypted2.pgp'
+tna@debian:~$ cd alice/
+tna@debian:~/alice$ gpg --homedir . --decrypt encrypted2.pgp
+gpg: encrypted with cv25519 key, ID E8E4DB2A734F9F23, created 2026-11-23
+      "Alice <alice@example.com.invalid>"
+Hi Alice,
+
+This is my secret message. I'm so happy we have PGP to protect our communications! 
+
+The right to private communication is important in a free society. 
+
+-- Anh
+gpg: Signature made Mon 23 Nov 2026 10:17:58 PM EET
+gpg:                using EDDSA key D61E698287C1E8656B26B32E9997CB85DA699699
+gpg: Good signature from "Anh To DEMO KEY <tna@example.com.invalid>" [full]
+
+```
 ## e) Voluntary
 [Cryptopals: Challenge Set 1](https://www.cryptopals.com/sets/1)
 1. Convert hex to base64 (feel free to use a library for base64)
