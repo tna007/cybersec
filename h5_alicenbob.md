@@ -118,39 +118,84 @@ $ gpg --gen-key
 
 
 The fingerprint of keys in the keyring can be checked with:
+
 ```ls
    $ gpg --fingerprint
 ```
 The fingerprint provides a way to verify that an imported public key really belongs to the expected person.
 
 
-exports public key:
-``ls
+Then exports public key:
+
+```ls
    $ gpg --export --armor --output anh.pub
-``
+```
+
 The `--armor` option converts the key into printable ASCII representation, making it easy to transfer through methods such as email.
 
-Alice then imports my public key:
-``ls
-   $ gpg --homedir . --import anh.pub
-``
+After that created a simulated user, Alice, by creating a folder in our home directory. It was protected so that only the owner (us) can use it.
+
+```ls
+  $ cd
+  $ mkdir alice/
+  $ chmod og-rwx alice/
+
+  # just work inside this alice/ folder, replace 'gpg' with 'gpg --homedir .'
+  # so that Alice has her own settings and own keyring, separate from the one we actually use
+  $ gpg --homedir . --fingerprint  # '--homedir .' means use current working directory to save gpg configuration files. Listing the fingerprints of all keys prints nothing, because Alice does not yet have any keys
+  gpg: keybox '/home/tna/alice/pubring.kbx' created
+  gpg: /home/tna/alice/trustdb.gpg: trustdb created
+
+  $ gpg --homedir . --gen-key # create Alice's own keypair
+
+  # let Alice import my public key
+  $ cd
+  $ cp -v anh.pub alice/
+  'anh.pub' -> 'alice/anh.pub'
+  $ cd alice/
+  $ gpg --homedir . --import anh.pub
+```
+
 Public keys do not need to be transferred secretly. However, Alice must verify my key fingerprint through a trusted method to make sure that an attacker has not substituted another key.
 
 After verification, Alice can sign my key to indicate that she trusts it:
-``ls
-   $ gpg --homedir . --sign-key "fingerprint"
-``
-The same process is repeated in the opposite direction to obtain and verify Alice's public key.
 
-Once trust has been established, Alice can encrypt a message for me and digitally sign it:
-``ls
-   $ gpg --homedir . --encrypt \
+```ls
+    $ gpg --homedir . --sign-key "fingerprint"
+
+    # trust has been established
+    $ gpg --homedir . --fingerprint
+    uid            [ultimate] Alice <alice@example.com.invalid>
+    uid           [  full  ] Anh To DEMO KEY <tna@example.com.invalid>
+
+    # we need Alices public key to know it's her
+    # exporting, importing, verifying and trusting the key are same as before, swap the roles only
+    $ gpg --homedir . --export --armor --output alice.pub
+    $ cp -v alice/alice.pub .
+    'alice/alice.pub' -> './alice.pub'
+
+    # key is sent over untrusted channel
+    $ cd 
+    $ cp -v alice/alice.pub .
+
+    # import Alice the key and verify Alice's public key
+    $ gpg --import alice.pub
+    $ gpg --sign-key "EB13 B092 6F39 4346 7D52  C3BB A8D1 4A7B 7F62 A28E"
+    $ gpg --fingerprint
+    uid           [  full  ] Alice <alice@example.com.invalid>
+```
+
+Once trust has been established, Alice can encrypt a message to send and digitally sign it:
+
+```ls
+    $ cd ~/alice/
+    $ micro msg.txt # write something then saves Ctrl-S and quits Ctrl-Q.
+    $ gpg --homedir . --encrypt \
         --recipient tna@example.com.invalid \
         --sign \
         --output encrypted.pgp \
         --armor msg.txt
-``
-The important options are:
+```
 
 - `--encrypt`: Encrypt the message.
 - `--recipient`: Select the recipient's public key.
@@ -166,9 +211,10 @@ The content can then be transferred over an untrusted network because someone in
 
 Decrypt the received message with:
 
-    gpg --decrypt encrypted.pgp
-
-GPG uses my private key to decrypt the message. At the same time, Alice's public key is used to verify her digital signature.
+```ls
+$ gpg --decrypt encrypted.pgp
+```
+GPG uses the recevier's private key to decrypt the message. At the same time, Alice's public key is used to verify her digital signature.
 
 A successful verification produces output such as:
 
@@ -176,17 +222,44 @@ A successful verification produces output such as:
 
 
 ## a) Pubkey today
-Explain how you have used public key cryptography today or yesterday, outside of this homework. In addition to naming the system, identify how different parties use keys in different steps of the system
+An example is Git over SSH, I also have my own PGP key and if I use an SSH remote to pull or push code. In that case, a private key stored on my computer can be used to authenticate me, while the corresponding public key is known by the remote service.
 
 ## b) Encrypt and decrypt a message
-Explain how different parties use different keys at different stages of operation. Evaluate the security of the tool you've chosen.
+I consider GPG a secure tool for encrypting and signing messages when the keys are properly managed.
+- The sender uses the recipient's public key when encrypting, while only the recipient possesses the corresponding private key needed for decryption. GPG also uses a symmetric session key for efficient encryption of the actual message.
+- If authentication is required, the sender can sign the message with their own private key and the recipient can verify the signature using the sender's public key. This provides confidentiality, integrity and authenticity.
+- However, the cryptography cannot solve the trust problem automatically. If I accept a public key without verifying its fingerprint, I could encrypt information for an attacker's key instead. Protecting private keys and reliably verifying public keys are therefore essential parts of GPG's security.
 
 ## c) Password management
-Demonstrate use of a password manager. What kind of attacks take advantage of people not using password managers.
+Demonstrate use of Bitwarden password manager:
+<img width="1242" height="1008" alt="image" src="https://github.com/user-attachments/assets/7cfae2c7-6efd-482f-adcd-60532d2bca39" />
+
+```mermaid
+---
+title: Bitwarden usage workflow
+---
+flowchart TD
+A["Unlock Bitwarden vault"] --> B["Create a new login entry"]
+B --> C["Enter website and username"]
+C --> D["Use password generator"]
+D --> E["Generate a long, unique random password"]
+E --> F["Save credentials in encrypted vault"]
+F --> G["Visit the website"]
+G --> H["Use Bitwarden to autofill credentials"]
+H --> I["Log in without memorizing or reusing password"]
+I --> J["Lock Bitwarden vault when finished"]
+ 
+E --> K["Different password for every account"]
+K --> L["One leaked password does not expose other accounts"]
+L --> M["Reduces risk from credential stuffing"]
+```
+
+People who do not use a password manager may be more likely to reuse passwords or create passwords that are easy to remember and therefore easier to guess. One important attack that takes advantage of this is credential stuffing. Attackers obtain username and password combinations from a breached service and automatically try the same credentials on other services
 
 ## d) Voluntary: Details of PGP
 Send an encrypted and signed message using PGP, then verify and decrypt it using previously Alice folder to simulate user.
 ```ls
+# The same process is repeated in the opposite direction like the instructions from Karvinen 2023: [PGP - Send Encrypted and Signed Message - gpg](https://terokarvinen.com/2023/pgp-encrypt-sign-verify/)
 tna@debian:~/alice$ cd
 tna@debian:~$ cp -v alice/anh.pub .
 'alice/anh.pub' -> './anh.pub'
@@ -212,8 +285,12 @@ tna@debian:~$ head -4 encrypted2.pgp
 
 hF4D6OTbKnNPnyMSAQdAxXaKpmoXO1SZhOGQJnrINImlj6T1gUclzD1PAr2iNR4w
 AqOy3Hld7Oj4RbZ06WRpjSQsuKVINgtPL/XQyPX+NclyxOz8fcnACuIkCogGmE3p
+
+# simulate the message transfer by copying the file
 tna@debian:~$ cp -v encrypted2.pgp alice/
 'encrypted2.pgp' -> 'alice/encrypted2.pgp'
+
+# Alice received my message and decrypted it
 tna@debian:~$ cd alice/
 tna@debian:~/alice$ gpg --homedir . --decrypt encrypted2.pgp
 gpg: encrypted with cv25519 key, ID E8E4DB2A734F9F23, created 2026-11-23
